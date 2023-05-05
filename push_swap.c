@@ -56,16 +56,27 @@ void	print_list(t_stack *list)
 	ft_printf("-----print end------\n");
 }
 
-int	check_sort(t_stack *list)
+t_stack	*make_b()
 {
-	while (list->num)
-	{
-		if (list->next->num != 0 && list->num > list->next->num)
-			return (0);
-		list = list->next;
-	}
-	return (1);
+	t_stack	*end;
+	
+	end = init_node();
+	// end = add_list("5", end);
+	end->next = end;
+	end->prev = end;
+	return (end);
 }
+
+// int	check_sort(t_stack *list)
+// {
+// 	while (list->num)
+// 	{
+// 		if (list->next->num != 0 && list->num > list->next->num)
+// 			return (0);
+// 		list = list->next;
+// 	}
+// 	return (1);
+// }
 
 int find_min(t_stack *list)
 {
@@ -111,13 +122,9 @@ int main(int argc, char *argv[])
 	}
 
 	a = make_list(argv);
-	print_list(a);
-
-	t_stack	*end = init_node();
-	// b = add_list("5", end);
-	b = end;
-	b->next = end;
-	b->prev = b;
+	// print_list(a);
+	b = make_b();
+	// print_list(b);
 
 	int min = 0;
 	while (a->next->next != a)
