@@ -10,7 +10,7 @@
 typedef struct stack
 {
 	int num;
-	// int coordinate;
+	int coordinate;
 	struct stack *next;
 	struct stack *prev;
 }	t_stack;
@@ -40,5 +40,7 @@ void	free_all(t_stack *a, t_stack *b);
 void	print_list(t_stack *list);
 int find_min(t_stack *list);
 int	find_max(t_stack *list);
+
+void	coordinate_compress(t_stack *list);
 
 # endif
