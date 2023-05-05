@@ -17,7 +17,7 @@ typedef struct stack
 
 typedef struct info
 {
-	// t_stack *stack_head;
+	t_stack *stack_head;
 	int	size;
 	int	max;
 	int min;
