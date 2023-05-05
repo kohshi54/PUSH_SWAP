@@ -110,6 +110,25 @@ void	push_a(t_stack **a, t_stack **b)
 	ft_printf("pa\n");
 }
 
+void	free_all(t_stack *a, t_stack *b)
+{
+	t_stack *tmp;
+
+	while (a->num)
+	{
+		tmp = a->next;
+		free(a);
+		a = tmp;
+	}
+	free(a);
+	while (b->num)
+	{
+		tmp = b->next;
+		free(a);
+	}
+	free(b);
+}
+
 int main(int argc, char *argv[])
 {
 	t_stack *a;
@@ -140,5 +159,11 @@ int main(int argc, char *argv[])
 		push_a(&a, &b);
 	}
 	print_list(a);
+	free_all(a, b);
 	return (0);
 }
+
+// __attribute__((destructor))
+// static void destructor() {
+//     system("leaks -q push_swap");
+// }
