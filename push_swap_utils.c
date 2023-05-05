@@ -1,111 +1,138 @@
 #include "push_swap.h"
 
-/*
-t_stack *swap(t_stack *list)
+t_stack *init_node(void)
 {
-	t_stack *zero;
-	t_stack *one;
-	t_stack *two;
-	t_stack *three;
-	zero = list->prev;
-	one = list;
-	two = list->next;
-	three = list->next->next;
-	zero->next = two;
-	two->prev = zero;
-	two->next = one;
-	one->prev = two;
-	one->next = three;
-	three->prev = one;
-	return (two);
-}
-*/
+	t_stack *new;
 
-void	swap(t_stack **list)
-{
-	t_stack *zero;
-	t_stack *one;
-	t_stack *two;
-	t_stack *three;
-
-	zero = (*list)->prev;
-	one = (*list);
-	two = (*list)->next;
-	three = (*list)->next->next;
-
-	zero->next = two;
-	two->prev = zero;
-
-	two->next = one;
-	one->prev = two;
-
-	one->next = three;
-	three->prev = one;
-
-	*list = two;
+	new = (t_stack *)malloc(sizeof(t_stack));
+	if (!new)
+		exit(EXIT_FAILURE);
+	new->num = 0;
+	new->next = NULL;
+	new->prev = NULL;
+	return (new);
 }
 
-
-void	push(t_stack **list_a, t_stack **list_b)
+t_stack *add_list(char *str, t_stack *prev)
 {
-	t_stack *zero_a;
-	t_stack *one_a;
-	t_stack *two_a;
-	t_stack *zero_b;
-	t_stack *one_b;
+	t_stack *new;
 
-	zero_a = (*list_a)->prev;
-	one_a = (*list_a);
-	two_a = (*list_a)->next;
-	zero_b = (*list_b)->prev;
-	one_b = (*list_b);
-
-	zero_a->next = two_a;
-	two_a->prev = zero_a;
-
-	zero_b->next = one_a;
-	one_a->prev = zero_b;
-	one_a->next = one_b;
-	one_b->prev = one_a;
-
-	(*list_a) = two_a;
-	(*list_b) = one_a;
+	new = (t_stack *)malloc(sizeof(t_stack));
+	if (!new)
+		exit(EXIT_FAILURE);
+	new->num = ft_atoi(str);
+	new->prev = prev;
+	new->next = NULL;
+	prev->next = new;
+	return (new);
 }
 
-/*
-t_stack *rotate(t_stack *list)
+t_stack *make_list(char *argv[], t_info *info)
 {
-	t_stack *head;
-	head = list->next;
-	swap(list->prev);
-	return (head);
+	t_stack *cur;
+	t_stack *end;
+
+	cur = init_node();
+	end = cur;
+	info->size = 0;
+	info->min = INT_MAX;
+	info->max = INT_MIN;
+	while (*(++argv))
+	{
+		cur = add_list(*argv, cur);
+		info->size++;
+		if (cur->num > info->max)
+			info->max = cur->num;
+		if (cur->num < info->min)
+			info->min = cur->num;
+	}
+	cur->next = end;
+	end->prev = cur;
+
+	return (end->next);
 }
-*/
 
-void	rotate(t_stack **list)
+t_stack	*make_b(t_info *info)
 {
-	t_stack *head;
-
-	head = (*list)->next;
-	swap(&((*list)->prev));
-	*list = head;
+	t_stack	*end;
+	
+	info->min = INT_MAX;
+	info->max = INT_MIN;
+	info->size = 0;
+	end = init_node();
+	// end = add_list("5", end);
+	end->next = end;
+	end->prev = end;
+	return (end);
 }
 
-/*
-t_stack *reverse_rotate(t_stack *list)
+// int	check_sort(t_stack *list)
+// {
+// 	while (list->num)
+// 	{
+// 		if (list->next->num != 0 && list->num > list->next->num)
+// 			return (0);
+// 		list = list->next;
+// 	}
+// 	return (1);
+// }
+
+int find_min(t_stack *list)
 {
-	t_stack *head;
-	head = list->prev->prev;
-	swap(list->prev->prev);
-	return (head);
+	int min;
+
+	min = INT_MAX;
+	while (list->num)
+	{
+		if (min > list->num)
+			min = list->num;
+		list = list->next;
+	}
+	return (min);
 }
-*/
 
-void	reverse_rotate(t_stack **list)
+int	find_max(t_stack *list)
 {
-	t_stack *last;
+	int max;
 
-	last = (*list)->prev->prev;
-	swap(&last);
-	*list = (*list)->prev;
+	max = INT_MIN;
+	while (list->num)
+	{
+		if (max < list->num)
+			max = list->num;
+		list = list->next;
+	}
+	return (max);
+}
+
+void	print_list(t_stack *list)
+{
+	ft_printf("-----print start----\n");
+	while (list->num)
+	{
+		ft_printf("%d\n", list->num);
+		list = list->next;
+	}
+	ft_printf("%d\n", list->num);
+	ft_printf("-----print end------\n");
+}
+
+void	free_all(t_stack *a, t_stack *b)
+{
+	t_stack *tmp;
+
+	while (a->num)
+	{
+		tmp = a->next;
+		free(a);
+		a = tmp;
+	}
+	free(a);
+	while (b->num)
+	{
+		tmp = b->next;
+		free(b);
+		b = tmp;
+	}
+	free(b);
 }
