@@ -8,8 +8,8 @@ t_stack *init_node(void)
 	if (!new)
 		exit(EXIT_FAILURE);
 	new->num = 0;
-	new->next = NULL;
-	new->prev = NULL;
+	new->next = new;
+	new->prev = new;
 	new->coordinate = 0;
 	return (new);
 }
@@ -24,28 +24,23 @@ t_stack *add_list(char *str, t_stack *prev)
 	new->num = ft_atoi(str);
 	new->prev = prev;
 	new->next = NULL;
+	new->coordinate = 0;
 	prev->next = new;
 	return (new);
 }
 
-t_stack *make_list(char *argv[], t_info *info)
+t_stack *make_list(char *argv[])
 {
 	t_stack *cur;
 	t_stack *end;
 
-	cur = init_node();
-	end = cur;
-	info->size = 0;
-	info->min = INT_MAX;
-	info->max = INT_MIN;
+	// cur = init_node();
+	// end = cur;
+	end = init_node();
+	cur = end;
 	while (*(++argv))
 	{
 		cur = add_list(*argv, cur);
-		info->size++;
-		if (cur->num > info->max)
-			info->max = cur->num;
-		if (cur->num < info->min)
-			info->min = cur->num;
 	}
 	cur->next = end;
 	end->prev = cur;
@@ -53,30 +48,21 @@ t_stack *make_list(char *argv[], t_info *info)
 	return (end->next);
 }
 
-t_stack	*make_b(t_info *info)
+void	make_b(t_info *info_b)
 {
-	t_stack	*end;
-	
-	info->min = INT_MAX;
-	info->max = INT_MIN;
-	info->size = 0;
-	end = init_node();
-	// end = add_list("5", end);
-	end->next = end;
-	end->prev = end;
-	return (end);
+	info_b->size = 0;
+	info_b->min = INT_MAX;
+	info_b->max = INT_MIN;
+	info_b->stack_head = init_node();
 }
 
-// int	check_sort(t_stack *list)
-// {
-// 	while (list->num)
-// 	{
-// 		if (list->next->num != 0 && list->num > list->next->num)
-// 			return (0);
-// 		list = list->next;
-// 	}
-// 	return (1);
-// }
+void	make_a(t_info *info_a, char *argv[])
+{
+	info_a->size = 0;
+	info_a->min = INT_MAX;
+	info_a->max = INT_MIN;
+	info_a->stack_head = make_list(argv);
+}
 
 int find_min(t_stack *list)
 {
@@ -85,8 +71,8 @@ int find_min(t_stack *list)
 	min = INT_MAX;
 	while (list->coordinate)
 	{
-		if (min > list->num)
-			min = list->num;
+		if (min > list->coordinate)
+			min = list->coordinate;
 		list = list->next;
 	}
 	return (min);
@@ -97,13 +83,28 @@ int	find_max(t_stack *list)
 	int max;
 
 	max = INT_MIN;
-	while (list->num)
+	while (list->coordinate)
 	{
-		if (max < list->num)
-			max = list->num;
+		if (max < list->coordinate)
+			max = list->coordinate;
 		list = list->next;
 	}
 	return (max);
+}
+
+void print_bit(int input)
+{
+	unsigned char byte = 1;
+	
+	byte = byte << 7;
+	while (byte != 0)
+	{
+		if (input & byte)
+			write(STDOUT_FILENO, "1", sizeof(char));
+		else
+			write(STDOUT_FILENO, "0", sizeof(char));
+		byte = byte >> 1;
+	}		
 }
 
 void	print_list(t_stack *list)
@@ -111,7 +112,9 @@ void	print_list(t_stack *list)
 	ft_printf("-----print start----\n");
 	while (list->coordinate)
 	{
-		ft_printf("num: %d, coordinate: %d\n", list->num, list->coordinate);
+		ft_printf("num: %d, coordinate: %d (", list->num, list->coordinate);
+		print_bit(list->coordinate);
+		ft_printf(")\n");
 		list = list->next;
 	}
 	ft_printf("num: %d, coordinate: %d\n", list->num, list->coordinate);
@@ -138,27 +141,42 @@ void	free_all(t_stack *a, t_stack *b)
 	free(b);
 }
 
-void	coordinate_compress(t_stack *list)
+void	coordinate_compress(t_stack *list, t_info *info_a)
 {
-	size_t	count;
+	int	count;
 	t_stack	*head;
 	t_stack	*tmp;
-
+	
 	head = list;
-	while (list->next != head)
+	while (list->num)
 	{
 		tmp = head;
 		count = 1;
-		while (tmp->next != head)
+		while (tmp->num)
 		{
 			if (tmp->num < list->num)
-			{
 				count++;
-			}
 			tmp = tmp->next;
 		}
 		list->coordinate = count;
+		if (count < info_a->min)
+			info_a->min = count;
+		else if (count > info_a->max)
+			info_a->max = count;
+		info_a->size++;
 		list = list->next;
 	}
-	// list->coordinate = 0;
+}
+
+size_t	get_digit(int max)
+{
+	size_t	digit;
+
+	digit = 0;
+	while (max)
+	{
+		digit++;
+		max = max >> 1;
+	}
+	return (digit);
 }
