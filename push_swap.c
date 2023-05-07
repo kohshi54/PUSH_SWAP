@@ -4,6 +4,7 @@ int main(int argc, char *argv[])
 {
 	t_info	info_a;
 	t_info	info_b;
+	size_t	digit;
 
 	if (argc < 2)
 	{
@@ -16,18 +17,38 @@ int main(int argc, char *argv[])
 	print_list(info_a.stack_head);
 	info_b.stack_head = make_b(&info_b);
 	// print_list(info_b.stack_head);
-	int min = 0;
-	while ((info_a.stack_head)->next->next != info_a.stack_head)
+
+	digit = get_digit(info_a.size);
+	// ft_printf("%d\n", digit);
+
+	size_t	i;
+	i = 0;
+	while (i < digit)
 	{
-		min = find_min(info_a.stack_head);
-		while (info_a.stack_head->num != min)
-			rotate_a(&(info_a.stack_head));
-		push_b(&(info_a.stack_head), &(info_b.stack_head), &info_a, &info_b);
-	}
-	// print_list(b);
-	while (info_b.stack_head->coordinate)
-	{
-		push_a(&(info_a.stack_head), &(info_b.stack_head), &info_a, &info_b);
+		t_stack *head = info_a.stack_head;
+		bool flag = 1;
+		while (flag || info_a.stack_head != head)
+		{
+			flag = 0;
+			if (info_a.stack_head->coordinate & (1 << i))
+			{
+				rotate_a(&(info_a.stack_head));
+			}
+			else
+			{
+				if (head == info_a.stack_head)
+				{
+					head = info_a.stack_head->next;
+					flag = 1;
+				}
+				push_b(&(info_a.stack_head), &(info_b.stack_head), &info_a, &info_b);
+			}
+		}
+		while (info_b.stack_head->next != info_b.stack_head)
+		{
+			push_a(&(info_a.stack_head), &(info_b.stack_head), &info_a, &info_b);
+		}
+		i++;
 	}
 
 	print_list(info_a.stack_head);

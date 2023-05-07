@@ -41,6 +41,8 @@ void	print_list(t_stack *list);
 int find_min(t_stack *list);
 int	find_max(t_stack *list);
 
+size_t	get_digit(int max);
+
 void	coordinate_compress(t_stack *list);
 
 # endif

@@ -106,12 +106,29 @@ int	find_max(t_stack *list)
 	return (max);
 }
 
+void print_bit(int input)
+{
+	unsigned char byte = 1;
+	
+	byte = byte << 7;
+	while (byte != 0)
+	{
+		if (input & byte)
+			write(STDOUT_FILENO, "1", sizeof(char));
+		else
+			write(STDOUT_FILENO, "0", sizeof(char));
+		byte = byte >> 1;
+	}		
+}
+
 void	print_list(t_stack *list)
 {
 	ft_printf("-----print start----\n");
 	while (list->coordinate)
 	{
-		ft_printf("num: %d, coordinate: %d\n", list->num, list->coordinate);
+		ft_printf("num: %d, coordinate: %d (", list->num, list->coordinate);
+		print_bit(list->coordinate);
+		ft_printf(")\n");
 		list = list->next;
 	}
 	ft_printf("num: %d, coordinate: %d\n", list->num, list->coordinate);
@@ -161,4 +178,17 @@ void	coordinate_compress(t_stack *list)
 		list = list->next;
 	}
 	// list->coordinate = 0;
+}
+
+size_t	get_digit(int max)
+{
+	size_t	digit;
+
+	digit = 0;
+	while (max)
+	{
+		digit++;
+		max = max >> 1;
+	}
+	return (digit);
 }
