@@ -58,8 +58,10 @@ int	find_max(t_stack *list);
 
 // size_t	find_maximum(t_stack *list);
 // size_t	find_shorter_path_to_max(t_stack *list, int max);
-size_t	search_backward(t_info *info);
-size_t	search_forward(t_info *info);
+// size_t	search_backward(t_info *info);
+size_t	search_backward(t_info *info, int target);
+// size_t	search_forward(t_info *info);
+size_t	search_forward(t_info *info, int target);
 
 size_t	get_digit(int max);
 

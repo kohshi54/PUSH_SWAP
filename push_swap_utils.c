@@ -34,8 +34,6 @@ t_stack *make_list(char *argv[])
 	t_stack *cur;
 	t_stack *end;
 
-	// cur = init_node();
-	// end = cur;
 	end = init_node();
 	cur = end;
 	while (*(++argv))
