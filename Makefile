@@ -1,8 +1,8 @@
 NAME = push_swap
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 
-SRCS = push_swap.c push_swap_utils.c
+SRCS = push_swap.c push_swap_utils.c push_swap_instruction.c
 OBJS = $(SRCS:%.c=%.o)
 
 LIBFT = libft.a
@@ -20,7 +20,7 @@ $(NAME) : $(OBJS) $(LIBFT)
 $(LIBFT) : $(LIBFT_DIR)
 	$(MAKE) -C $(LIBFT_DIR)
 
-clean :
+clean : 
 	rm -f $(OBJS)
 	$(MAKE) clean -C $(LIBFT_DIR)
 
@@ -33,3 +33,4 @@ re : fclean all
 .PHONY : clean fclean re all
 
 .SECONDARY :
+
