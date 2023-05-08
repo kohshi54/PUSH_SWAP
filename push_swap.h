@@ -10,14 +10,14 @@
 typedef struct stack
 {
 	long num;
-	int coordinate;
+	int index;
 	struct stack *next;
 	struct stack *prev;
 }	t_stack;
 
 typedef struct info
 {
-	t_stack *stack_head;
+	t_stack *head;
 	int	size;
 	int	max;
 	int min;
@@ -68,7 +68,7 @@ size_t	get_digit(int max);
 
 // void	coordinate_compress(t_stack *list);
 // void	coordinate_compress(t_stack *list, t_info *info_a);
-void	coordinate_compress(t_info *info_a);
+void	index_compress(t_info *info_a);
 
 size_t	get_count_of_less_than_pivot(t_info *info_a, int pivot);
 int	find_nearest_target(t_info *info_a, int pivot);

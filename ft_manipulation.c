@@ -5,11 +5,11 @@ size_t	get_count_of_less_than_pivot(t_info *info_a, int pivot)
 	t_stack	*list;
 	size_t	count;
 
-	list = info_a->stack_head;
+	list = info_a->head;
 	count = 0;
-	while (list->coordinate)
+	while (list->index)
 	{
-		if (list->coordinate < pivot)
+		if (list->index < pivot)
 			count++;
 		list = list->next;
 	}
@@ -21,14 +21,14 @@ int	find_nearest_target(t_info *info_a, int pivot)
 	t_stack	*forward;
 	t_stack	*backward;
 
-	forward = info_a->stack_head;
-	backward = info_a->stack_head->prev->prev;
-	while (forward->coordinate != backward->coordinate)
+	forward = info_a->head;
+	backward = info_a->head->prev->prev;
+	while (forward->index != backward->index)
 	{
-		if (forward->coordinate < pivot)
-			return (forward->coordinate);
-		if (backward->coordinate < pivot)
-			return (backward->coordinate);
+		if (forward->index < pivot)
+			return (forward->index);
+		if (backward->index < pivot)
+			return (backward->index);
 		forward = forward->next;
 		backward = backward->prev;
 	}
@@ -46,22 +46,22 @@ void	find_less_than_pivot_and_push_b(t_info *info_a, t_info *info_b, int pivot, 
 		target = find_nearest_target(info_a, pivot);
 		if (search_forward(info_a, target) <= search_backward(info_a, target))
 		{
-			while (info_a->stack_head->coordinate != target && target)
+			while (info_a->head->index != target && target)
 			{
-				rotate_a(&(info_a->stack_head));
+				rotate_a(&(info_a->head));
 			}
 		}
 		else
 		{
-			while (info_a->stack_head->coordinate != target)
+			while (info_a->head->index != target)
 			{
-				reverse_rotate_a(&(info_a->stack_head));
+				reverse_rotate_a(&(info_a->head));
 			}
 		}
 		push_b(info_a, info_b);
-		if ((pivot - element) < info_b->stack_head->coordinate && info_b->stack_head->coordinate < (pivot - (element / 2)))
+		if ((pivot - element) < info_b->head->index && info_b->head->index < (pivot - (element / 2)))
 		{
-			rotate_b(&(info_b->stack_head));
+			rotate_b(&(info_b->head));
 		}
 	}
 }
@@ -75,16 +75,16 @@ void	find_largest_and_push_a(t_info *info_a, t_info *info_b)
 	{
 		if (search_forward(info_b, info_b->max) <= search_backward(info_b, info_b->max))
 		{
-			while (info_b->stack_head->coordinate != info_b->max)
+			while (info_b->head->index != info_b->max)
 			{
-				rotate_b(&(info_b->stack_head));
+				rotate_b(&(info_b->head));
 			}
 		}
 		else
 		{
-			while (info_b->stack_head->coordinate != info_b->max)
+			while (info_b->head->index != info_b->max)
 			{
-				reverse_rotate_b(&(info_b->stack_head));
+				reverse_rotate_b(&(info_b->head));
 			}
 		}
 		push_a(info_a, info_b);
@@ -97,8 +97,8 @@ size_t	search_forward(t_info *info, int target)
 	t_stack *list;
 
 	count = 0;
-	list = info->stack_head;
-	while (list->coordinate != 0 && list->coordinate != target)
+	list = info->head;
+	while (list->index != 0 && list->index != target)
 	{
 		list = list->next;
 		count++;
@@ -111,13 +111,13 @@ size_t	search_backward(t_info *info, int target)
 	size_t	count;
 	t_stack *list;
 
-	list = info->stack_head;
+	list = info->head;
 	count = 0;
-	if (list->coordinate == target)
+	if (list->index == target)
 		return (0);
 	list = list->prev->prev;
 	count++;
-	while (list->coordinate != 0 && list->coordinate != target)
+	while (list->index != 0 && list->index != target)
 	{
 		list = list->prev;
 		count++;

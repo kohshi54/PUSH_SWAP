@@ -5,10 +5,10 @@ int find_min(t_stack *list)
 	int min;
 
 	min = INT_MAX;
-	while (list->coordinate)
+	while (list->index)
 	{
-		if (min > list->coordinate)
-			min = list->coordinate;
+		if (min > list->index)
+			min = list->index;
 		list = list->next;
 	}
 	return (min);
@@ -19,10 +19,10 @@ int	find_max(t_stack *list)
 	int max;
 
 	max = INT_MIN;
-	while (list->coordinate)
+	while (list->index)
 	{
-		if (max < list->coordinate)
-			max = list->coordinate;
+		if (max < list->index)
+			max = list->index;
 		list = list->next;
 	}
 	return (max);
@@ -32,12 +32,12 @@ int	find_max(t_stack *list)
 void	print_list(t_stack *list)
 {
 	ft_printf("-----print start----\n");
-	while (list->coordinate)
+	while (list->index)
 	{
-		printf("num: %ld, coordinate: %d\n", list->num, list->coordinate);
+		printf("num: %ld, index: %d\n", list->num, list->index);
 		list = list->next;
 	}
-	printf("num: %ld, coordinate: %d\n", list->num, list->coordinate);
+	printf("num: %ld, index: %d\n", list->num, list->index);
 	ft_printf("-----print end------\n");
 }
 
@@ -45,14 +45,14 @@ void	free_all(t_stack *a, t_stack *b)
 {
 	t_stack *tmp;
 
-	while (a->coordinate)
+	while (a->index)
 	{
 		tmp = a->next;
 		free(a);
 		a = tmp;
 	}
 	free(a);
-	while (b->coordinate)
+	while (b->index)
 	{
 		tmp = b->next;
 		free(b);
@@ -61,14 +61,14 @@ void	free_all(t_stack *a, t_stack *b)
 	free(b);
 }
 
-void	coordinate_compress(t_info *info_a)
+void	index_compress(t_info *info_a)
 {
 	int	count;
 	t_stack	*head;
 	t_stack	*tmp;
 	t_stack	*list;
 	
-	list = info_a->stack_head;
+	list = info_a->head;
 	head = list;
 	while (list->next != head)
 	{
@@ -80,7 +80,7 @@ void	coordinate_compress(t_info *info_a)
 				count++;
 			tmp = tmp->next;
 		}
-		list->coordinate = count;
+		list->index = count;
 		if (count < info_a->min)
 			info_a->min = count;
 		if (count > info_a->max)
@@ -95,13 +95,13 @@ void	put_error_and_free_and_exit(t_info info_a)
 	t_stack *tmp;
 
 	ft_printf("Error\n");
-	while (info_a.stack_head->coordinate)
+	while (info_a.head->index)
 	{
-		tmp = info_a.stack_head->next;
-		free(info_a.stack_head);
-		info_a.stack_head = tmp;
+		tmp = info_a.head->next;
+		free(info_a.head);
+		info_a.head = tmp;
 	}
-	free(info_a.stack_head);
+	free(info_a.head);
 	exit(EXIT_FAILURE);
 }
 
@@ -110,18 +110,18 @@ void	input_validation(t_info info_a)
 	t_stack	*head;
 	t_stack	*tmp;
 
-	head = info_a.stack_head;
-	while (info_a.stack_head->coordinate)
+	head = info_a.head;
+	while (info_a.head->index)
 	{
-		if (info_a.stack_head->num == (WRONG_NUM))
+		if (info_a.head->num == (WRONG_NUM))
 			put_error_and_free_and_exit(info_a);
 		tmp = head;
-		while (tmp->coordinate)
+		while (tmp->index)
 		{
-			if ((tmp != info_a.stack_head) && (tmp->num == info_a.stack_head->num))
+			if ((tmp != info_a.head) && (tmp->num == info_a.head->num))
 				put_error_and_free_and_exit(info_a);
 			tmp = tmp->next;
 		}
-		info_a.stack_head = info_a.stack_head->next;
+		info_a.head = info_a.head->next;
 	}
 }

@@ -56,7 +56,7 @@ void	rotate(t_stack **list)
 	t_stack *head;
 
 	head = (*list)->next;
-	if (head->coordinate == 0)
+	if (head->index == 0)
 		return ;
 	swap(&((*list)->prev));
 	*list = head;
@@ -67,12 +67,10 @@ void	reverse_rotate(t_stack **list)
 	t_stack *last;
 
 	last = (*list)->prev->prev;
-	if ((*list)->next->coordinate == 0)
+	if ((*list)->next->index == 0)
 		return ;
 	swap(&last);
-	// *list = (*list)->prev;
 	*list = last;
-	// print_list(*list);
 }
 
 void	rotate_b(t_stack **list)
@@ -101,42 +99,42 @@ void	reverse_rotate_a(t_stack **list)
 
 void	push_b(t_info *info_a, t_info *info_b)
 {
-	if (info_a->stack_head->next == info_a->stack_head)
+	if (info_a->head->next == info_a->head)
 		return ;
-	if (info_a->stack_head->coordinate > info_b->max)
-		info_b->max = info_a->stack_head->coordinate;
-	if (info_a->stack_head->coordinate < info_b->min)
-		info_b->min = info_a->stack_head->coordinate;
+	if (info_a->head->index > info_b->max)
+		info_b->max = info_a->head->index;
+	if (info_a->head->index < info_b->min)
+		info_b->min = info_a->head->index;
 	
-	if (info_a->stack_head->coordinate == info_a->max)
-		info_a->max = find_max(info_a->stack_head->next);
-	if (info_a->stack_head->coordinate == info_a->min)
-		info_a->min = find_min(info_a->stack_head->next);
+	if (info_a->head->index == info_a->max)
+		info_a->max = find_max(info_a->head->next);
+	if (info_a->head->index == info_a->min)
+		info_a->min = find_min(info_a->head->next);
 
 	info_a->size--;
 	info_b->size++;
-	push(&(info_a->stack_head), &(info_b->stack_head));
+	push(&(info_a->head), &(info_b->head));
 	ft_printf("pb\n");
 }
 
 void	push_a(t_info *info_a, t_info *info_b)
 {
-	if (info_b->stack_head->next == info_b->stack_head)
+	if (info_b->head->next == info_b->head)
 		return ;
-	if (info_b->stack_head->coordinate > info_a->max)
-		info_a->max = info_b->stack_head->coordinate;
-	if (info_b->stack_head->num < info_a->min)
-		info_a->min = info_b->stack_head->coordinate;
+	if (info_b->head->index > info_a->max)
+		info_a->max = info_b->head->index;
+	if (info_b->head->num < info_a->min)
+		info_a->min = info_b->head->index;
 	
-	if (info_b->stack_head->coordinate == info_b->max)
-		info_b->max = find_max(info_b->stack_head->next);
-	if (info_b->stack_head->coordinate == info_b->min)
-		info_b->min = find_min(info_b->stack_head->next);
+	if (info_b->head->index == info_b->max)
+		info_b->max = find_max(info_b->head->next);
+	if (info_b->head->index == info_b->min)
+		info_b->min = find_min(info_b->head->next);
 	
 	info_a->size++;
 	info_b->size--;
 
-	push(&(info_b->stack_head), &(info_a->stack_head));
+	push(&(info_b->head), &(info_a->head));
 	ft_printf("pa\n");
 }
 

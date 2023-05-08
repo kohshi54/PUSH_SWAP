@@ -10,7 +10,7 @@ t_stack *init_node(void)
 	new->num = INT_MIN - (long)2;
 	new->next = new;
 	new->prev = new;
-	new->coordinate = 0;
+	new->index = 0;
 	return (new);
 }
 
@@ -33,7 +33,7 @@ t_stack *add_list(char *str, t_stack *prev)
 	new->num = ft_atoi(str);
 	new->prev = prev;
 	new->next = NULL;
-	new->coordinate = 0;
+	new->index = 0;
 	prev->next = new;
 	return (new);
 }
@@ -64,16 +64,16 @@ void	make_b(t_info *info_a, t_info *info_b)
 	info_b->size = 0;
 	info_b->min = INT_MAX;
 	info_b->max = INT_MIN;
-	info_b->stack_head = init_node();
-	if (!info_b->stack_head)
+	info_b->head = init_node();
+	if (!info_b->head)
 	{
-		while (info_a->stack_head->coordinate)
+		while (info_a->head->index)
 		{
-			tmp = info_a->stack_head->next; 
-			free(info_a->stack_head);
-			info_a->stack_head = tmp;
+			tmp = info_a->head->next; 
+			free(info_a->head);
+			info_a->head = tmp;
 		}
-		free(info_a->stack_head);
+		free(info_a->head);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -83,5 +83,5 @@ void	make_a(t_info *info_a, char *argv[])
 	info_a->size = 0;
 	info_a->min = INT_MAX;
 	info_a->max = INT_MIN;
-	info_a->stack_head = make_list(argv);
+	info_a->head = make_list(argv);
 }
