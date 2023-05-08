@@ -70,7 +70,9 @@ void	reverse_rotate(t_stack **list)
 	if ((*list)->next->coordinate == 0)
 		return ;
 	swap(&last);
-	*list = (*list)->prev;
+	// *list = (*list)->prev;
+	*list = last;
+	// print_list(*list);
 }
 
 void	rotate_b(t_stack **list)

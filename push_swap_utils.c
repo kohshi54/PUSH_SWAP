@@ -83,7 +83,7 @@ void	coordinate_compress(t_info *info_a)
 		list->coordinate = count;
 		if (count < info_a->min)
 			info_a->min = count;
-		else if (count > info_a->max)
+		if (count > info_a->max)
 			info_a->max = count;
 		info_a->size++;
 		list = list->next;
