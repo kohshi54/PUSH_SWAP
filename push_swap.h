@@ -9,7 +9,7 @@
 
 typedef struct stack
 {
-	int num;
+	long num;
 	int coordinate;
 	struct stack *next;
 	struct stack *prev;
@@ -48,7 +48,8 @@ t_stack	*add_list(char *str, t_stack *prev);
 // t_stack	*make_list(char *argv[], t_info *info);
 t_stack *make_list(char *argv[]);
 // t_stack	*make_b();
-void	make_b(t_info *info_b);
+// void	make_b(t_info *info_b);
+void	make_b(t_info *info_a, t_info *info_b);
 void	make_a(t_info *info_a, char *argv[]);
 void	free_all(t_stack *a, t_stack *b);
 
@@ -66,6 +67,16 @@ size_t	search_forward(t_info *info, int target);
 size_t	get_digit(int max);
 
 // void	coordinate_compress(t_stack *list);
-void	coordinate_compress(t_stack *list, t_info *info_a);
+// void	coordinate_compress(t_stack *list, t_info *info_a);
+void	coordinate_compress(t_info *info_a);
+
+size_t	get_count_of_less_than_pivot(t_info *info_a, int pivot);
+int	find_nearest_target(t_info *info_a, int pivot);
+void	find_less_than_pivot_and_push_b(t_info *info_a, t_info *info_b, int pivot, int element);
+void	find_largest_and_push_a(t_info *info_a, t_info *info_b);
+size_t	search_forward(t_info *info, int target);
+size_t	search_backward(t_info *info, int target);
+
+void	input_validation(t_info info_a);
 
 # endif

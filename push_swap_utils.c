@@ -1,67 +1,5 @@
 #include "push_swap.h"
 
-t_stack *init_node(void)
-{
-	t_stack *new;
-
-	new = (t_stack *)malloc(sizeof(t_stack));
-	if (!new)
-		exit(EXIT_FAILURE);
-	new->num = 0;
-	new->next = new;
-	new->prev = new;
-	new->coordinate = 0;
-	return (new);
-}
-
-t_stack *add_list(char *str, t_stack *prev)
-{
-	t_stack *new;
-
-	new = (t_stack *)malloc(sizeof(t_stack));
-	if (!new)
-		exit(EXIT_FAILURE);
-	new->num = ft_atoi(str);
-	new->prev = prev;
-	new->next = NULL;
-	new->coordinate = 0;
-	prev->next = new;
-	return (new);
-}
-
-t_stack *make_list(char *argv[])
-{
-	t_stack *cur;
-	t_stack *end;
-
-	end = init_node();
-	cur = end;
-	while (*(++argv))
-	{
-		cur = add_list(*argv, cur);
-	}
-	cur->next = end;
-	end->prev = cur;
-
-	return (end->next);
-}
-
-void	make_b(t_info *info_b)
-{
-	info_b->size = 0;
-	info_b->min = INT_MAX;
-	info_b->max = INT_MIN;
-	info_b->stack_head = init_node();
-}
-
-void	make_a(t_info *info_a, char *argv[])
-{
-	info_a->size = 0;
-	info_a->min = INT_MAX;
-	info_a->max = INT_MIN;
-	info_a->stack_head = make_list(argv);
-}
-
 int find_min(t_stack *list)
 {
 	int min;
@@ -90,32 +28,16 @@ int	find_max(t_stack *list)
 	return (max);
 }
 
-void print_bit(int input)
-{
-	unsigned char byte = 1;
-	
-	byte = byte << 7;
-	while (byte != 0)
-	{
-		if (input & byte)
-			write(STDOUT_FILENO, "1", sizeof(char));
-		else
-			write(STDOUT_FILENO, "0", sizeof(char));
-		byte = byte >> 1;
-	}		
-}
-
+#include <stdio.h>
 void	print_list(t_stack *list)
 {
 	ft_printf("-----print start----\n");
 	while (list->coordinate)
 	{
-		ft_printf("num: %d, coordinate: %d (", list->num, list->coordinate);
-		print_bit(list->coordinate);
-		ft_printf(")\n");
+		printf("num: %ld, coordinate: %d\n", list->num, list->coordinate);
 		list = list->next;
 	}
-	ft_printf("num: %d, coordinate: %d\n", list->num, list->coordinate);
+	printf("num: %ld, coordinate: %d\n", list->num, list->coordinate);
 	ft_printf("-----print end------\n");
 }
 
@@ -139,18 +61,20 @@ void	free_all(t_stack *a, t_stack *b)
 	free(b);
 }
 
-void	coordinate_compress(t_stack *list, t_info *info_a)
+void	coordinate_compress(t_info *info_a)
 {
 	int	count;
 	t_stack	*head;
 	t_stack	*tmp;
+	t_stack	*list;
 	
+	list = info_a->stack_head;
 	head = list;
-	while (list->num)
+	while (list->next != head)
 	{
 		tmp = head;
 		count = 1;
-		while (tmp->num)
+		while (tmp->next != head)
 		{
 			if (tmp->num < list->num)
 				count++;
@@ -166,15 +90,38 @@ void	coordinate_compress(t_stack *list, t_info *info_a)
 	}
 }
 
-size_t	get_digit(int max)
+void	put_error_and_free_and_exit(t_info info_a)
 {
-	size_t	digit;
+	t_stack *tmp;
 
-	digit = 0;
-	while (max)
+	ft_printf("Error\n");
+	while (info_a.stack_head->coordinate)
 	{
-		digit++;
-		max = max >> 1;
+		tmp = info_a.stack_head->next;
+		free(info_a.stack_head);
+		info_a.stack_head = tmp;
 	}
-	return (digit);
+	free(info_a.stack_head);
+	exit(EXIT_FAILURE);
+}
+
+void	input_validation(t_info info_a)
+{
+	t_stack	*head;
+	t_stack	*tmp;
+
+	head = info_a.stack_head;
+	while (info_a.stack_head->coordinate)
+	{
+		if (info_a.stack_head->num == (WRONG_NUM))
+			put_error_and_free_and_exit(info_a);
+		tmp = head;
+		while (tmp->coordinate)
+		{
+			if ((tmp != info_a.stack_head) && (tmp->num == info_a.stack_head->num))
+				put_error_and_free_and_exit(info_a);
+			tmp = tmp->next;
+		}
+		info_a.stack_head = info_a.stack_head->next;
+	}
 }

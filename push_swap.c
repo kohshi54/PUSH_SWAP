@@ -1,128 +1,103 @@
 #include "push_swap.h"
 
-size_t	get_count_of_less_than_pivot(t_info *info_a, int pivot)
+size_t	check_if_list_is_sorted(t_info info_a)
 {
-	t_stack	*list;
-	size_t	count;
-
-	list = info_a->stack_head;
-	count = 0;
-	while (list->coordinate)
+	while (info_a.stack_head->next->coordinate)
 	{
-		if (list->coordinate < pivot)
-			count++;
-		list = list->next;
-	}
-	return (count);
-}
-
-int	find_nearest_target(t_info *info_a, int pivot)
-{
-	t_stack	*forward;
-	t_stack	*backward;
-
-	forward = info_a->stack_head;
-	backward = info_a->stack_head->prev->prev;
-	while (forward->coordinate != backward->coordinate)
-	{
-		if (forward->coordinate < pivot)
-			return (forward->coordinate);
-		if (backward->coordinate < pivot)
-			return (backward->coordinate);
-		forward = forward->next;
-		backward = backward->prev;
-	}
-	return (0);
-}
-
-void	find_less_than_pivot_and_push_b(t_info *info_a, t_info *info_b, int pivot, int element)
-{
-	size_t	size;
-	int		target;
-
-	size = get_count_of_less_than_pivot(info_a, pivot);
-	while (size--)
-	{
-		target = find_nearest_target(info_a, pivot);
-		if (search_forward(info_a, target) <= search_backward(info_a, target))
+		if (info_a.stack_head->coordinate > info_a.stack_head->next->coordinate)
 		{
-			while (info_a->stack_head->coordinate != target && target)
-			{
+			return (0);
+		}
+		info_a.stack_head = info_a.stack_head->next;
+	}
+	return (1);
+}
+
+void	sort_when_three(t_info **info_a)
+{
+	t_stack *list;
+
+	list = (*info_a)->stack_head;
+	// ft_printf("%d: %d\n", list->coordinate, (*info_a)->max);
+	if (list->coordinate == (*info_a)->min && list->next->coordinate == (*info_a)->max)
+	{
+		reverse_rotate_a(&list);
+		swap_a(&list);
+		return ;
+	}
+	if (list->next->coordinate == (*info_a)->min && list->next->next->coordinate == (*info_a)->max)
+	{
+		swap_a(&list);
+		return ;
+	}
+	if (list->next->coordinate == (*info_a)->max && list->next->next->coordinate == (*info_a)->min)
+	{
+		reverse_rotate_a(&list);
+		ft_printf("-----\n");
+		print_list(list);
+		ft_printf("-----\n");
+		return ;
+	}
+	if (list->coordinate == (*info_a)->max && list->next->coordinate == (*info_a)->min)
+	{
+		rotate_a(&list);
+		return ;
+	}
+	if (list->coordinate == (*info_a)->max && list->next->next->coordinate == (*info_a)->min)
+	{
+		rotate_a(&list);
+		swap_a(&list);
+		return ;
+	}
+}
+
+void	sort_by_input_number(t_info *info_a, t_info *info_b)
+{
+	int		pivot;
+	size_t	element;
+
+	if (check_if_list_is_sorted(*info_a) == 1)
+		return ;
+	if (info_a->size == 2)
+		swap_a(&(info_a->stack_head));
+	if (info_a->size == 3)
+		sort_when_three(&info_a);
+	if (3 < info_a->size && info_a->size < 7)
+	{
+		while (info_a->size > 3)
+		{
+			while (info_a->stack_head->coordinate != info_a->min)
 				rotate_a(&(info_a->stack_head));
-			}
+			push_b(info_a, info_b);
 		}
-		else
+		print_list(info_a->stack_head);
+		print_list(info_b->stack_head);
+		sort_when_three(&info_a);
+		ft_printf("sizea: %d, sizeb: %d\n", info_a->size, info_b->size);
+		while (info_b->size)
 		{
-			while (info_a->stack_head->coordinate != target)
-			{
-				reverse_rotate_a(&(info_a->stack_head));
-			}
+			push_a(info_a, info_b);
+			print_list(info_a->stack_head);
+			print_list(info_b->stack_head);			
 		}
-		push_b(info_a, info_b);
-		if ((pivot - element) < info_b->stack_head->coordinate && info_b->stack_head->coordinate < (pivot - (element / 2)))
-		{
-			rotate_b(&(info_b->stack_head));
-		}
+		ft_printf("sizea: %d, sizeb: %d\n", info_a->size, info_b->size);
+		print_list(info_a->stack_head);
+		print_list(info_b->stack_head);
 	}
-}
-
-void	find_largest_and_push_a(t_info *info_a, t_info *info_b)
-{
-	size_t	size;
-
-	size = info_b->size;
-	while (size--)
+	if (info_a->size >= 7)
 	{
-		if (search_forward(info_b, info_b->max) <= search_backward(info_b, info_b->max))
+		element = info_a->size / 6;
+		pivot = 0;
+		while (info_a->size)
 		{
-			while (info_b->stack_head->coordinate != info_b->max)
-			{
-				rotate_b(&(info_b->stack_head));
-			}
+			pivot += element;
+			find_less_than_pivot_and_push_b(info_a, info_b, pivot, element);
 		}
-		else
+		while (info_b->size)
 		{
-			while (info_b->stack_head->coordinate != info_b->max)
-			{
-				reverse_rotate_b(&(info_b->stack_head));
-			}
+			find_largest_and_push_a(info_a, info_b);
 		}
-		push_a(info_a, info_b);
 	}
-}
-
-size_t	search_forward(t_info *info, int target)
-{
-	size_t	count;
-	t_stack *list;
-
-	count = 0;
-	list = info->stack_head;
-	while (list->coordinate != 0 && list->coordinate != target)
-	{
-		list = list->next;
-		count++;
-	}
-	return (count);
-}
-
-size_t	search_backward(t_info *info, int target)
-{
-	size_t	count;
-	t_stack *list;
-
-	list = info->stack_head;
-	count = 0;
-	if (list->coordinate == target)
-		return (0);
-	list = list->prev->prev;
-	count++;
-	while (list->coordinate != 0 && list->coordinate != target)
-	{
-		list = list->prev;
-		count++;
-	}
-	return (count);
 }
 
 int main(int argc, char *argv[])
@@ -131,29 +106,15 @@ int main(int argc, char *argv[])
 	t_info	info_b;
 
 	if (argc < 2)
-	{
-		ft_printf("too few arguments");
 		return (0);
-	}
-
 	make_a(&info_a, argv);
-	coordinate_compress(info_a.stack_head, &info_a);
-	// print_list(info_a.stack_head);
-	make_b(&info_b);
-	// print_list(info_b.stack_head);
+	coordinate_compress(&info_a);
+	input_validation(info_a);
+	make_b(&info_a, &info_b);
 
-	int		pivot = 0;
-	size_t	element = info_a.size / 5;
-	while (info_a.size)
-	{
-		pivot += element;
-		find_less_than_pivot_and_push_b(&info_a, &info_b, pivot, element);
-	}
-	while (info_b.size)
-	{
-		find_largest_and_push_a(&info_a, &info_b);
-	}
-	// print_list(info_a.stack_head);
+	sort_by_input_number(&info_a, &info_b);
+
+	print_list(info_a.stack_head);
 	// print_list(info_b.stack_head);
 	free_all(info_a.stack_head, info_b.stack_head);
 	return (0);
