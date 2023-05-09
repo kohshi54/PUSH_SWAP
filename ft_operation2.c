@@ -28,7 +28,7 @@ void	push_b(t_info *info_a, t_info *info_b)
 		info_b->max = info_a->head->index;
 	if (info_a->head->index < info_b->min)
 		info_b->min = info_a->head->index;
-	
+
 	if (info_a->head->index == info_a->max)
 		info_a->max = find_max(info_a->head->next);
 	if (info_a->head->index == info_a->min)
@@ -49,12 +49,12 @@ void	push_a(t_info *info_a, t_info *info_b)
 		info_a->max = info_b->head->index;
 	if (info_b->head->num < info_a->min)
 		info_a->min = info_b->head->index;
-	
+
 	if (info_b->head->index == info_b->max)
 		info_b->max = find_max(info_b->head->next);
 	if (info_b->head->index == info_b->min)
 		info_b->min = find_min(info_b->head->next);
-	
+
 	info_a->size++;
 	info_b->size--;
 

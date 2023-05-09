@@ -12,7 +12,7 @@ void	rotate_a(t_stack **list)
 	ft_printf("ra\n");
 }
 
-void rotate_a_and_b(t_stack **list_a, t_stack **list_b)
+void	rotate_a_and_b(t_stack **list_a, t_stack **list_b)
 {
 	rotate(list_a);
 	rotate(list_b);

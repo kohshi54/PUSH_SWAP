@@ -1,8 +1,8 @@
 #include "push_swap.h"
 
-int find_min(t_stack *list)
+int	find_min(t_stack *list)
 {
-	int min;
+	int	min;
 
 	min = INT_MAX;
 	while (list->index)
@@ -16,7 +16,7 @@ int find_min(t_stack *list)
 
 int	find_max(t_stack *list)
 {
-	int max;
+	int	max;
 
 	max = INT_MIN;
 	while (list->index)

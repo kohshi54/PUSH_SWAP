@@ -43,21 +43,15 @@ void	find_less_than_pivot_and_push_b(t_info *info_a, t_info *info_b, int pivot, 
 		if (search_forward(info_a->head, target) <= search_backward(info_a->head, target))
 		{
 			while (info_a->head->index != target)
-			{
 				rotate_a(&(info_a->head));
-			}
 		}
 		else
 		{
 			while (info_a->head->index != target)
-			{
 				reverse_rotate_a(&(info_a->head));
-			}
 		}
 		push_b(info_a, info_b);
 		if (info_b->head->index < (pivot - (element / 2)))
-		{
 			rotate_b(&(info_b->head));
-		}
 	}
 }

@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_info	info_a;
 	t_info	info_b;
@@ -12,7 +12,6 @@ int main(int argc, char *argv[])
 	input_validation(info_a);
 	make_b(&info_a, &info_b);
 
-	
 	/*
 	print_list(info_a.head);
 	ft_printf("min: %d, max: %d\n", info_a.min, info_a.max);

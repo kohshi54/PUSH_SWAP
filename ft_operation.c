@@ -2,14 +2,13 @@
 
 void	swap(t_stack **list)
 {
-	t_stack *zero;
-	t_stack *one;
-	t_stack *two;
-	t_stack *three;
+	t_stack	*zero;
+	t_stack	*one;
+	t_stack	*two;
+	t_stack	*three;
 
 	if (*list == (*list)->next->next)
 		return ;
-
 	zero = (*list)->prev;
 	one = (*list);
 	two = (*list)->next;
@@ -27,11 +26,11 @@ void	swap(t_stack **list)
 
 void	push(t_stack **list_a, t_stack **list_b)
 {
-	t_stack *zero_a;
-	t_stack *one_a;
-	t_stack *two_a;
-	t_stack *zero_b;
-	t_stack *one_b;
+	t_stack	*zero_a;
+	t_stack	*one_a;
+	t_stack	*two_a;
+	t_stack	*zero_b;
+	t_stack	*one_b;
 
 	zero_a = (*list_a)->prev;
 	one_a = (*list_a);
@@ -53,7 +52,7 @@ void	push(t_stack **list_a, t_stack **list_b)
 
 void	rotate(t_stack **list)
 {
-	t_stack *head;
+	t_stack	*head;
 
 	head = (*list)->next;
 	if (head->index == 0)
@@ -64,7 +63,7 @@ void	rotate(t_stack **list)
 
 void	reverse_rotate(t_stack **list)
 {
-	t_stack *last;
+	t_stack	*last;
 
 	last = (*list)->prev->prev;
 	if ((*list)->next->index == 0)

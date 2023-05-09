@@ -1,8 +1,8 @@
 #include "push_swap.h"
 
-t_stack *init_node(void)
+t_stack	*init_node(void)
 {
-	t_stack *new;
+	t_stack	*new;
 
 	new = (t_stack *)malloc(sizeof(t_stack));
 	if (!new)
@@ -14,9 +14,9 @@ t_stack *init_node(void)
 	return (new);
 }
 
-t_stack *add_list(char *str, t_stack *prev)
+t_stack	*add_list(char *str, t_stack *prev)
 {
-	t_stack *new;
+	t_stack	*new;
 	t_stack	*tmp;
 
 	new = (t_stack *)malloc(sizeof(t_stack));
@@ -38,10 +38,10 @@ t_stack *add_list(char *str, t_stack *prev)
 	return (new);
 }
 
-t_stack *make_list(char *argv[])
+t_stack	*make_list(char *argv[])
 {
-	t_stack *cur;
-	t_stack *end;
+	t_stack	*cur;
+	t_stack	*end;
 
 	end = init_node();
 	if (!end)
@@ -53,13 +53,12 @@ t_stack *make_list(char *argv[])
 	}
 	cur->next = end;
 	end->prev = cur;
-
 	return (end->next);
 }
 
 void	make_b(t_info *info_a, t_info *info_b)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	info_b->size = 0;
 	info_b->min = INT_MAX;
@@ -69,7 +68,7 @@ void	make_b(t_info *info_a, t_info *info_b)
 	{
 		while (info_a->head->index)
 		{
-			tmp = info_a->head->next; 
+			tmp = info_a->head->next;
 			free(info_a->head);
 			info_a->head = tmp;
 		}

@@ -15,7 +15,7 @@ size_t	check_if_list_is_sorted(t_info info_a)
 
 void	sort_when_three(t_info *info_a)
 {
-	t_stack *list;
+	t_stack	*list;
 
 	list = info_a->head;
 	if (list->index == info_a->min && list->next->index == info_a->max)

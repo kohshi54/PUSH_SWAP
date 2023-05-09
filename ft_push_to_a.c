@@ -29,21 +29,15 @@ void	find_largest_and_push_a(t_info *info_a, t_info *info_b)
 		if (search_forward(info_b->head, target) <= search_backward(info_b->head, target))
 		{
 			while (info_b->head->index != target)
-			{
 				rotate_b(&(info_b->head));
-			}
 		}
 		else
 		{
 			while (info_b->head->index != target)
-			{
 				reverse_rotate_b(&(info_b->head));
-			}
 		}
 		push_a(info_a, info_b);
 		if (info_a->head->next->index != 0 && info_a->head->next->index < info_a->head->index)
-		{
 			swap_a(&(info_a->head));
-		}
 	}
 }
