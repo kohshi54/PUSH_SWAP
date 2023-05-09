@@ -8,8 +8,8 @@ int	main(int argc, char *argv[])
 	if (argc < 2)
 		return (0);
 	make_a(&info_a, argv);
-	index_compress(&info_a);
-	input_validation(info_a);
+	make_index(&info_a);
+	validate_input(info_a);
 	make_b(&info_a, &info_b);
 
 	/*

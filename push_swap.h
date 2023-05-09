@@ -49,10 +49,10 @@ void	make_b(t_info *info_a, t_info *info_b);
 void	make_a(t_info *info_a, char *argv[]);
 
 /* ft_prepare.c */
-void	free_all(t_stack *a, t_stack *b);
-void	index_compress(t_info *info_a);
-void	put_error_and_free_and_exit(t_info info_a);
-void	input_validation(t_info info_a);
+void	free_all(t_stack *list_a, t_stack *list_b);
+void	make_index(t_info *info_a);
+void	put_error_and_free_and_exit(t_stack *list);
+void	validate_input(t_info info_a);
 
 /* ft_search.c */
 int		find_min(t_stack *list);

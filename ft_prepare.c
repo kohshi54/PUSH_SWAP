@@ -1,39 +1,37 @@
 #include "push_swap.h"
 
-void	free_all(t_stack *a, t_stack *b)
+void	free_all(t_stack *list_a, t_stack *list_b)
 {
 	t_stack	*tmp;
 
-	while (a->index)
+	while (list_a->index)
 	{
-		tmp = a->next;
-		free(a);
-		a = tmp;
+		tmp = list_a->next;
+		free(list_a);
+		list_a = tmp;
 	}
-	free(a);
-	while (b->index)
+	free(list_a);
+	while (list_b->index)
 	{
-		tmp = b->next;
-		free(b);
-		b = tmp;
+		tmp = list_b->next;
+		free(list_b);
+		list_b = tmp;
 	}
-	free(b);
+	free(list_b);
 }
 
-void	index_compress(t_info *info_a)
+void	make_index(t_info *info_a)
 {
 	int		count;
-	t_stack	*head;
 	t_stack	*tmp;
 	t_stack	*list;
 
 	list = info_a->head;
-	head = list;
-	while (list->next != head)
+	while (list->next != info_a->head)
 	{
-		tmp = head;
+		tmp = info_a->head;
 		count = 1;
-		while (tmp->next != head)
+		while (tmp->next != info_a->head)
 		{
 			if (tmp->num < list->num)
 				count++;
@@ -49,22 +47,23 @@ void	index_compress(t_info *info_a)
 	}
 }
 
-void	put_error_and_free_and_exit(t_info info_a)
+
+void	put_error_and_free_and_exit(t_stack *list)
 {
 	t_stack	*tmp;
 
 	ft_printf("Error\n");
-	while (info_a.head->index)
+	while (list->index)
 	{
-		tmp = info_a.head->next;
-		free(info_a.head);
-		info_a.head = tmp;
+		tmp = list->next;
+		free(list);
+		list = tmp;
 	}
-	free(info_a.head);
+	free(list);
 	exit(EXIT_FAILURE);
 }
 
-void	input_validation(t_info info_a)
+void	validate_input(t_info info_a)
 {
 	t_stack	*head;
 	t_stack	*tmp;
@@ -73,12 +72,12 @@ void	input_validation(t_info info_a)
 	while (info_a.head->index)
 	{
 		if (info_a.head->num == (WRONG_NUM))
-			put_error_and_free_and_exit(info_a);
+			put_error_and_free_and_exit(head);
 		tmp = head;
 		while (tmp->index)
 		{
 			if ((tmp != info_a.head) && (tmp->num == info_a.head->num))
-				put_error_and_free_and_exit(info_a);
+				put_error_and_free_and_exit(head);
 			tmp = tmp->next;
 		}
 		info_a.head = info_a.head->next;
