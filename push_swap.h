@@ -76,6 +76,9 @@ size_t	get_count_of_less_than_pivot(t_stack *list, int pivot);
 int		find_nearest_target(t_stack *list, int pivot);
 void	find_less_than_pivot_and_push_b(t_info *info_a, t_info *info_b, int pivot, int element);
 
+/* ft_test.c */
 // void	print_list(t_stack *list);
+// void	print_forward(t_stack *list);
+// void	print_backward(t_stack *list);
 
 #endif
