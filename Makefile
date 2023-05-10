@@ -2,7 +2,10 @@ NAME = push_swap
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = push_swap.c push_swap_utils.c push_swap_instruction.c
+SRCS = push_swap.c ft_prepare.c ft_create_list.c \
+		ft_search.c ft_push_to_b.c ft_push_to_a.c \
+		ft_sort.c ft_operation.c ft_operation2.c ft_operation3.c \
+		ft_test.c
 OBJS = $(SRCS:%.c=%.o)
 
 LIBFT = libft.a
