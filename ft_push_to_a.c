@@ -8,9 +8,12 @@ int	find_largest_or_second_largest(t_stack *list, int max)
 	while (list->index != backward->index)
 	{
 		// if (list->index == max || list->index == (max - 1))
+		// if (list->index == max || list->index == (max - 1) || list->index == (max - 2))
+		// if (list->index == max || list->index == (max - 1) || list->index == (max - 2) || list->index == (max - 3))
 		if (list->index == max || list->index == (max - 1) || list->index == (max - 2))
 			return (list->index);
 		// if (backward->index == max || backward->index == (max - 1))
+		// if (backward->index == max || backward->index == (max - 1) || list->index == (max - 2) || list->index == (max - 3))
 		if (backward->index == max || backward->index == (max - 1) || list->index == (max - 2))
 			return (backward->index);
 		list = list->next;

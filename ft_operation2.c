@@ -47,17 +47,17 @@ void	push_a(t_info *info_a, t_info *info_b)
 		return ;
 	if (info_b->head->index > info_a->max)
 		info_a->max = info_b->head->index;
-	if (info_b->head->num < info_a->min)
+	if (info_b->head->index < info_a->min)
 		info_a->min = info_b->head->index;
 
 	if (info_b->head->index == info_b->max)
 		info_b->max = find_max(info_b->head->next);
 	if (info_b->head->index == info_b->min)
 		info_b->min = find_min(info_b->head->next);
-
 	info_a->size++;
 	info_b->size--;
 
 	push(&(info_b->head), &(info_a->head));
+
 	ft_printf("pa\n");
 }

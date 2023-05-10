@@ -63,42 +63,20 @@ void	sort_above_seven(t_info *info_a, t_info *info_b)
 {
 	int		pivot;
 	size_t	element;
-	// size_t	units;
 
-	// /*
-	element = info_a->size / 6;
-	if (info_a->size < 200)
-		element = 19;
-	else
-		element = 50;
+	element = 19;
+	if (info_a->size > 200)
+		element = 54;
 	pivot = 0;
-	// */
 	while (info_a->size)
 	{
-		// pivot = units * element * 2;
 		pivot += element;
 		find_less_than_pivot_and_push_b(info_a, info_b, pivot, element);
-		// units++;
 	}
 	while (info_b->size)
 	{
 		find_largest_and_push_a(info_a, info_b);
 	}
-	// while (info_b->size)
-	// {
-	// 	push_a(info_a, info_b);
-	// // 	find_less_than_pivot_and_push_a(info_a, info_b, 20, element);
-	// }
-	// pivot = 0;
-	// while (info_a->size)
-	// {
-	// 	pivot += element;
-	// 	find_less_than_pivot_and_push_b(info_a, info_b, pivot, element);
-	// }
-	// while (info_b->size)
-	// {
-	// 	find_largest_and_push_a(info_a, info_b);
-	// }
 }
 
 void	sort_by_input_number(t_info *info_a, t_info *info_b)

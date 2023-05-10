@@ -51,13 +51,15 @@ void	find_less_than_pivot_and_push_b(t_info *info_a, t_info *info_b, int pivot, 
 				reverse_rotate_a(&(info_a->head));
 		}
 		push_b(info_a, info_b);
-		if (info_b->head->index < (pivot - (element / 2)))
+		if (info_b->head->index < (pivot - (element / 2)) \
+			|| (pivot < info_b->head->index && info_b->head->index < pivot + (element / 2)))
 		{
-			rotate_b(&(info_b->head));
-		}
-		else if (pivot < info_b->head->index && info_b->head->index < pivot + (element / 2))
-		{
-			rotate_b(&(info_b->head));
+			
+			target = find_nearest_target(info_a->head, pivot + element);
+			if (size && search_forward(info_a->head, target) <= search_backward(info_a->head, target))
+				rotate_a_and_b(&(info_a->head), &(info_b->head));
+			else
+				rotate_b(&(info_b->head));
 		}
 	}
 }
