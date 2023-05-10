@@ -40,7 +40,7 @@ void	find_less_than_pivot_and_push_b(t_info *info_a, t_info *info_b, int pivot, 
 	while (size--)
 	{
 		target = find_nearest_target(info_a->head, pivot + element);
-			if (search_forward(info_a->head, target) <= search_backward(info_a->head, target))
+		if (search_forward(info_a->head, target) <= search_backward(info_a->head, target))
 		{
 			while (info_a->head->index != target)
 				rotate_a(&(info_a->head));
