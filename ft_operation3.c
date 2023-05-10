@@ -30,3 +30,10 @@ void	reverse_rotate_a(t_stack **list)
 	reverse_rotate(list);
 	ft_printf("rra\n");
 }
+
+void	reverse_rotate_a_and_b(t_stack **list_a, t_stack **list_b)
+{
+	reverse_rotate(list_a);
+	reverse_rotate(list_b);
+	ft_printf("rrr\n");
+}

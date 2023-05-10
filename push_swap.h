@@ -40,6 +40,7 @@ void	rotate_a(t_stack **list);
 void	rotate_a_and_b(t_stack **list_a, t_stack **list_b);
 void	reverse_rotate_b(t_stack **list);
 void	reverse_rotate_a(t_stack **list);
+void	reverse_rotate_a_and_b(t_stack **list_a, t_stack **list_b);
 
 /* ft_create_list.c */
 t_stack	*init_node(void);
