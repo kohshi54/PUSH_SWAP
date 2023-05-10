@@ -45,8 +45,8 @@ void	reverse_rotate_a(t_stack **list);
 t_stack	*init_node(void);
 t_stack	*add_list(char *str, t_stack *prev);
 t_stack	*make_list(char *argv[]);
-void	make_b(t_info *info_a, t_info *info_b);
-void	make_a(t_info *info_a, char *argv[]);
+void	make_stack_b(t_info *info_a, t_info *info_b);
+void	make_stack_a(t_info *info_a, char *argv[]);
 
 /* ft_prepare.c */
 void	free_all(t_stack *list_a, t_stack *list_b);
@@ -77,7 +77,7 @@ int		find_nearest_target(t_stack *list, int pivot);
 void	find_less_than_pivot_and_push_b(t_info *info_a, t_info *info_b, int pivot, int element);
 
 /* ft_test.c */
-// void	print_list(t_stack *list);
+void	print_list(t_stack *list);
 // void	print_forward(t_stack *list);
 // void	print_backward(t_stack *list);
 

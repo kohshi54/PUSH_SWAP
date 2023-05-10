@@ -36,6 +36,38 @@ void	find_less_than_pivot_and_push_b(t_info *info_a, t_info *info_b, int pivot, 
 	size_t	size;
 	int		target;
 
+	size = get_count_of_less_than_pivot(info_a->head, pivot + element);
+	while (size--)
+	{
+		target = find_nearest_target(info_a->head, pivot + element);
+			if (search_forward(info_a->head, target) <= search_backward(info_a->head, target))
+		{
+			while (info_a->head->index != target)
+				rotate_a(&(info_a->head));
+		}
+		else
+		{
+			while (info_a->head->index != target)
+				reverse_rotate_a(&(info_a->head));
+		}
+		push_b(info_a, info_b);
+		if (info_b->head->index < (pivot - (element / 2)))
+		{
+			rotate_b(&(info_b->head));
+		}
+		else if (pivot < info_b->head->index && info_b->head->index < pivot + (element / 2))
+		{
+			rotate_b(&(info_b->head));
+		}
+	}
+}
+
+/*
+void	find_less_than_pivot_and_push_b(t_info *info_a, t_info *info_b, int pivot, int element)
+{
+	size_t	size;
+	int		target;
+
 	size = get_count_of_less_than_pivot(info_a->head, pivot);
 	while (size--)
 	{
@@ -55,3 +87,4 @@ void	find_less_than_pivot_and_push_b(t_info *info_a, t_info *info_b, int pivot, 
 			rotate_b(&(info_b->head));
 	}
 }
+*/

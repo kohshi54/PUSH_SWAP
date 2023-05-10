@@ -52,7 +52,7 @@ void	put_error_and_free_and_exit(t_stack *list)
 {
 	t_stack	*tmp;
 
-	ft_printf("Error\n");
+	ft_putstr_fd("Error\n", STDERR_FILENO);
 	while (list->index)
 	{
 		tmp = list->next;

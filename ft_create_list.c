@@ -56,7 +56,7 @@ t_stack	*make_list(char *argv[])
 	return (end->next);
 }
 
-void	make_b(t_info *info_a, t_info *info_b)
+void	make_stack_b(t_info *info_a, t_info *info_b)
 {
 	t_stack	*tmp;
 
@@ -77,7 +77,7 @@ void	make_b(t_info *info_a, t_info *info_b)
 	}
 }
 
-void	make_a(t_info *info_a, char *argv[])
+void	make_stack_a(t_info *info_a, char *argv[])
 {
 	info_a->size = 0;
 	info_a->min = INT_MAX;
