@@ -1,6 +1,5 @@
 #include "push_swap.h"
 
-/* 
 #include <stdio.h>
 void	print_list(t_stack *list)
 {
@@ -13,6 +12,8 @@ void	print_list(t_stack *list)
 	printf("num: %ld, index: %d\n", list->num, list->index);
 	ft_printf("-----print end------\n");
 }
+
+/* 
 
 void	print_forward(t_stack *list)
 {

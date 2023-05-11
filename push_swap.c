@@ -4,7 +4,6 @@ int	main(int argc, char *argv[])
 {
 	t_info	info_a;
 	t_info	info_b;
-	size_t	digit;
 
 	if (argc < 2)
 		return (0);
@@ -22,7 +21,7 @@ int	main(int argc, char *argv[])
 
 	sort_by_input_number(&info_a, &info_b);
 
-	// print_list(info_a.head);
+	print_list(info_a.head);
 	// print_list(info_b.head);
 	free_all(info_a.head, info_b.head);
 	return (0);

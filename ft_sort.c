@@ -65,7 +65,7 @@ void	sort_above_seven(t_info *info_a, t_info *info_b)
 	size_t	element;
 
 	element = 19;
-	if (info_a->size > 200)
+	if (info_a->size)
 		element = 54;
 	pivot = 0;
 	while (info_a->size)
@@ -75,7 +75,7 @@ void	sort_above_seven(t_info *info_a, t_info *info_b)
 	}
 	while (info_b->size)
 	{
-		find_largest_and_push_a(info_a, info_b);
+		find_larger_than_pivot_and_push_a(info_a, info_b);
 	}
 }
 

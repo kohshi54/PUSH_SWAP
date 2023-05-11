@@ -69,8 +69,10 @@ void	sort_above_seven(t_info *info_a, t_info *info_b);
 void	sort_by_input_number(t_info *info_a, t_info *info_b);
 
 /* ft_push_to_a.c */
-int		find_largest_or_second_largest(t_stack *list, int max);
-void	find_largest_and_push_a(t_info *info_a, t_info *info_b);
+// int		find_largest_or_second_largest(t_stack *list, int max);
+int	find_largest_or_second_largest(t_stack *list, int max, int second_largest);
+// void	find_largest_and_push_a(t_info *info_a, t_info *info_b);
+void	find_larger_than_pivot_and_push_a(t_info *info_a, t_info *info_b);
 
 /* ft_push_to_b.c */
 size_t	get_count_of_less_than_pivot(t_stack *list, int pivot);
