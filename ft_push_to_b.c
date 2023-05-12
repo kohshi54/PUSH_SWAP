@@ -31,6 +31,17 @@ int	find_nearest_target(t_stack *list, int pivot)
 	return (list->index);
 }
 
+void	execute_optimized_rotate_b(t_info *info_a, t_info *info_b, size_t size, int pivot)
+{
+	int		target;
+
+	target = find_nearest_target(info_a->head, pivot);
+	if (size && search_forward(info_a->head, target) <= search_backward(info_a->head, target))
+		rotate_a_and_b(&(info_a->head), &(info_b->head));
+	else
+		rotate_b(&(info_b->head));
+}
+
 void	find_less_than_pivot_and_push_b(t_info *info_a, t_info *info_b, int pivot, int element)
 {
 	size_t	size;
@@ -54,39 +65,7 @@ void	find_less_than_pivot_and_push_b(t_info *info_a, t_info *info_b, int pivot, 
 		if (info_b->head->index < (pivot - (element / 2)) \
 			|| (pivot < info_b->head->index && info_b->head->index < pivot + (element / 2)))
 		{
-			
-			target = find_nearest_target(info_a->head, pivot + element);
-			if (size && search_forward(info_a->head, target) <= search_backward(info_a->head, target))
-				rotate_a_and_b(&(info_a->head), &(info_b->head));
-			else
-				rotate_b(&(info_b->head));
+			execute_optimized_rotate_b(info_a, info_b, size, pivot + element);
 		}
 	}
 }
-
-/*
-void	find_less_than_pivot_and_push_b(t_info *info_a, t_info *info_b, int pivot, int element)
-{
-	size_t	size;
-	int		target;
-
-	size = get_count_of_less_than_pivot(info_a->head, pivot);
-	while (size--)
-	{
-		target = find_nearest_target(info_a->head, pivot);
-		if (search_forward(info_a->head, target) <= search_backward(info_a->head, target))
-		{
-			while (info_a->head->index != target)
-				rotate_a(&(info_a->head));
-		}
-		else
-		{
-			while (info_a->head->index != target)
-				reverse_rotate_a(&(info_a->head));
-		}
-		push_b(info_a, info_b);
-		if (info_b->head->index < (pivot - (element / 2)))
-			rotate_b(&(info_b->head));
-	}
-}
-*/

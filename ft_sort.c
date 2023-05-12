@@ -64,7 +64,7 @@ void	sort_above_seven(t_info *info_a, t_info *info_b)
 	int		pivot;
 	size_t	element;
 
-	element = 19;
+	element = 17;
 	if (info_a->size > 200)
 		element = 54;
 	pivot = 0;
