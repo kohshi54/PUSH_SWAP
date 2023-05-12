@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 16:48:20 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/05/12 16:50:41 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:44:07 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	sort_from_four_to_six(t_info *info_a, t_info *info_b)
 
 void	sort_above_seven(t_info *info_a, t_info *info_b)
 {
-	int		pivot;
+	size_t	pivot;
 	size_t	element;
 
 	element = 17;

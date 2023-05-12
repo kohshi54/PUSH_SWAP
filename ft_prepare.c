@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 16:48:14 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/05/12 16:49:52 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:19:08 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	free_all(t_stack *list_a, t_stack *list_b)
 
 void	make_index(t_info *info_a)
 {
-	int		count;
+	size_t	count;
 	t_stack	*tmp;
 	t_stack	*list;
 

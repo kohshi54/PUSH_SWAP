@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 16:38:57 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/05/12 16:38:59 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:25:58 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	find_min(t_stack *list)
 {
-	int	min;
+	size_t	min;
 
 	min = INT_MAX;
 	while (list->index)
@@ -28,9 +28,9 @@ int	find_min(t_stack *list)
 
 int	find_max(t_stack *list)
 {
-	int	max;
+	size_t	max;
 
-	max = INT_MIN;
+	max = 0;
 	while (list->index)
 	{
 		if (max < list->index)
@@ -40,7 +40,7 @@ int	find_max(t_stack *list)
 	return (max);
 }
 
-size_t	search_forward(t_stack *list, int target)
+size_t	search_forward(t_stack *list, size_t target)
 {
 	size_t	count;
 
@@ -53,7 +53,7 @@ size_t	search_forward(t_stack *list, int target)
 	return (count);
 }
 
-size_t	search_backward(t_stack *list, int target)
+size_t	search_backward(t_stack *list, size_t target)
 {
 	size_t	count;
 

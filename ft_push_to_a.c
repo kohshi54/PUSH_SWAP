@@ -6,13 +6,13 @@
 /*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 16:40:09 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/05/12 16:46:59 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:42:11 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	find_largest_or_second_largest(t_stack *list, int max)
+int	find_largest_or_second_largest(t_stack *list, size_t max)
 {
 	t_stack	*backward;
 
@@ -33,7 +33,7 @@ int	find_largest_or_second_largest(t_stack *list, int max)
 
 void	execute_optimized_rotate_a(t_info *info_a, t_info *info_b)
 {
-	int		target;
+	size_t	target;
 
 	target = find_largest_or_second_largest(info_b->head, info_b->max);
 	if (search_forward(info_b->head, target) \
@@ -49,7 +49,7 @@ void	execute_optimized_rotate_a(t_info *info_a, t_info *info_b)
 
 void	execute_optimized_reverse_rotate_a(t_info *info_a, t_info *info_b)
 {
-	int		target;
+	long	target;
 
 	target = find_largest_or_second_largest(info_b->head, info_b->max);
 	if (search_forward(info_b->head, target) \
@@ -73,7 +73,7 @@ int	check_put_back_on_top(t_info *info_a)
 
 void	find_largest_and_push_a(t_info *info_a, t_info *info_b)
 {
-	int		target;
+	size_t	target;
 
 	target = find_largest_or_second_largest(info_b->head, info_b->max);
 	if (search_forward(info_b->head, target) \

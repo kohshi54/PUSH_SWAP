@@ -6,13 +6,13 @@
 /*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 16:36:27 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/05/12 16:38:39 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:31:08 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-size_t	get_count_of_less_than_pivot(t_stack *list, int pivot)
+size_t	get_count_of_less_than_pivot(t_stack *list, size_t pivot)
 {
 	size_t	count;
 
@@ -26,7 +26,7 @@ size_t	get_count_of_less_than_pivot(t_stack *list, int pivot)
 	return (count);
 }
 
-int	find_nearest_target(t_stack *list, int pivot)
+int	find_nearest_target(t_stack *list, size_t pivot)
 {
 	t_stack	*backward;
 
@@ -44,9 +44,9 @@ int	find_nearest_target(t_stack *list, int pivot)
 }
 
 void	execute_optimized_rotate_b(t_info *info_a, t_info *info_b, \
-									size_t size, int pivot)
+									size_t size, size_t pivot)
 {
-	int		target;
+	size_t		target;
 
 	target = find_nearest_target(info_a->head, pivot);
 	if (size && search_forward(info_a->head, target) \
@@ -57,10 +57,10 @@ void	execute_optimized_rotate_b(t_info *info_a, t_info *info_b, \
 }
 
 void	find_less_than_pivot_and_push_b(t_info *info_a, t_info *info_b, \
-											int pivot, int element)
+											size_t pivot, size_t element)
 {
 	size_t	size;
-	int		target;
+	size_t	target;
 
 	size = get_count_of_less_than_pivot(info_a->head, pivot + element);
 	while (size--)
