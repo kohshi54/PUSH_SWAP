@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/12 16:39:19 by kyamaguc          #+#    #+#             */
+/*   Updated: 2023/05/12 16:40:01 by kyamaguc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -75,11 +87,7 @@ void	find_largest_and_push_a(t_info *info_a, t_info *info_b);
 /* ft_push_to_b.c */
 size_t	get_count_of_less_than_pivot(t_stack *list, int pivot);
 int		find_nearest_target(t_stack *list, int pivot);
-void	find_less_than_pivot_and_push_b(t_info *info_a, t_info *info_b, int pivot, int element);
-
-/* ft_test.c */
-void	print_list(t_stack *list);
-// void	print_forward(t_stack *list);
-// void	print_backward(t_stack *list);
+void	find_less_than_pivot_and_push_b(t_info *info_a, t_info *info_b, \
+											int pivot, int element);
 
 #endif
