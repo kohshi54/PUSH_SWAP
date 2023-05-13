@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 16:40:09 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/05/14 02:37:36 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/05/14 02:46:57 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,8 @@ int	check_put_back_on_top(t_info *info_a)
 			|| info_a->head->index == info_a->max)) \
 			|| info_a->head->index - 2 == info_a->head->prev->prev->index);
 }
-*/
 
-void	find_larger_than_pivot_and_push_a(t_info *info_a, t_info *info_b)
+void	find_largest_and_push_a(t_info *info_a, t_info *info_b)
 {
 	size_t	target;
 

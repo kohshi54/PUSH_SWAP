@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 16:48:20 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/05/14 02:37:53 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/05/14 02:47:38 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	sort_above_seven(t_info *info_a, t_info *info_b)
 	}
 	while (info_b->size)
 	{
-		find_larger_than_pivot_and_push_a(info_a, info_b);
+		find_largest_and_push_a(info_a, info_b);
 	}
 }
 
