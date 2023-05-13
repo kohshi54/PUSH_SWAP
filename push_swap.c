@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/12 16:48:28 by kyamaguc          #+#    #+#             */
+/*   Updated: 2023/05/14 02:37:17 by kyamaguc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	main(int argc, char *argv[])
@@ -11,23 +23,7 @@ int	main(int argc, char *argv[])
 	make_index(&info_a);
 	validate_input(info_a);
 	make_stack_b(&info_a, &info_b);
-
-	// print_list(info_a.head);
-	/*
-	ft_printf("min: %d, max: %d\n", info_a.min, info_a.max);
-	print_list(info_b.head);
-	ft_printf("min: %d, max: %d\n", info_b.min, info_b.max);
-	*/
-
 	sort_by_input_number(&info_a, &info_b);
-
-	print_list(info_a.head);
-	// print_list(info_b.head);
 	free_all(info_a.head, info_b.head);
 	return (0);
 }
-
-// __attribute__((destructor))
-// static void destructor() {
-//     system("leaks -q push_swap");
-// }

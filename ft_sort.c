@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_sort.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/12 16:48:20 by kyamaguc          #+#    #+#             */
+/*   Updated: 2023/05/14 02:37:53 by kyamaguc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 size_t	check_if_list_is_sorted(t_info info_a)
@@ -23,13 +35,16 @@ void	sort_when_three(t_info *info_a)
 		reverse_rotate_a(&(info_a->head));
 		swap_a(&(info_a->head));
 	}
-	else if (list->next->index == info_a->min && list->next->next->index == info_a->max)
+	else if (list->next->index == info_a->min \
+				&& list->next->next->index == info_a->max)
 		swap_a(&(info_a->head));
-	else if (list->next->index == info_a->max && list->next->next->index == info_a->min)
+	else if (list->next->index == info_a->max \
+				&& list->next->next->index == info_a->min)
 		reverse_rotate_a(&(info_a->head));
 	else if (list->index == info_a->max && list->next->index == info_a->min)
 		rotate_a(&(info_a->head));
-	else if (list->index == info_a->max && list->next->next->index == info_a->min)
+	else if (list->index == info_a->max \
+				&& list->next->next->index == info_a->min)
 	{
 		rotate_a(&(info_a->head));
 		swap_a(&(info_a->head));
@@ -40,7 +55,8 @@ void	sort_from_four_to_six(t_info *info_a, t_info *info_b)
 {
 	while (info_a->size > 3)
 	{
-		if (search_forward(info_a->head, info_a->min) <= search_backward(info_a->head, info_a->min))
+		if (search_forward(info_a->head, info_a->min) \
+				<= search_backward(info_a->head, info_a->min))
 		{
 			while (info_a->head->index != info_a->min)
 				rotate_a(&(info_a->head));
@@ -61,11 +77,11 @@ void	sort_from_four_to_six(t_info *info_a, t_info *info_b)
 
 void	sort_above_seven(t_info *info_a, t_info *info_b)
 {
-	int		pivot;
+	size_t	pivot;
 	size_t	element;
 
-	element = 19;
-	if (info_a->size)
+	element = 17;
+	if (info_a->size > 200)
 		element = 54;
 	pivot = 0;
 	while (info_a->size)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_operation3.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/12 16:48:08 by kyamaguc          #+#    #+#             */
+/*   Updated: 2023/05/12 16:51:45 by kyamaguc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	rotate_b(t_stack **list)
@@ -29,11 +41,4 @@ void	reverse_rotate_a(t_stack **list)
 {
 	reverse_rotate(list);
 	ft_printf("rra\n");
-}
-
-void	reverse_rotate_a_and_b(t_stack **list_a, t_stack **list_b)
-{
-	reverse_rotate(list_a);
-	reverse_rotate(list_b);
-	ft_printf("rrr\n");
 }

@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 12:37:11 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/05/08 11:52:34 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/05/12 16:53:46 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,8 @@ long	ft_atoi(const char *str)
 				return (WRONG_NUM);
 		}
 		else
-		{
 			if (overflow_max_checker(num, str))
 				return (WRONG_NUM);
-		}
 		num = (num * 10) + (*str++ - '0');
 	}
 	if (*str != '\0')

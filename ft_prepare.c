@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_prepare.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/12 16:48:14 by kyamaguc          #+#    #+#             */
+/*   Updated: 2023/05/12 17:19:08 by kyamaguc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	free_all(t_stack *list_a, t_stack *list_b)
@@ -22,7 +34,7 @@ void	free_all(t_stack *list_a, t_stack *list_b)
 
 void	make_index(t_info *info_a)
 {
-	int		count;
+	size_t	count;
 	t_stack	*tmp;
 	t_stack	*list;
 
@@ -46,7 +58,6 @@ void	make_index(t_info *info_a)
 		list = list->next;
 	}
 }
-
 
 void	put_error_and_free_and_exit(t_stack *list)
 {

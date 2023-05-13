@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 14:26:09 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/05/08 11:52:10 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/05/12 16:53:10 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,12 @@ void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 
+// # ifndef WRONG_NUM
+// #  define WRONG_NUM (INT_MIN - (long)1)
+// # endif
+
 # ifndef WRONG_NUM
-#  define WRONG_NUM (INT_MIN - (long)1)
+#  define WRONG_NUM -2147483649
 # endif
 
 long	ft_atoi(const char *str);

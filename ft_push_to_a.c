@@ -1,32 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_push_to_a.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kyamaguc <kyamaguc@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/12 16:40:09 by kyamaguc          #+#    #+#             */
+/*   Updated: 2023/05/14 02:37:36 by kyamaguc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-size_t	get_count_of_larger_than_pivot(t_stack *list, int pivot)
-{
-	size_t	count;
-
-	count = 0;
-	while (list->index)
-	{
-		if (pivot <= list->index)
-			count++;
-		list = list->next;
-	}
-	return (count);
-}
-
-
-int	find_largest_or_pivot(t_stack *list, int max, int pivot)
+int	find_largest_or_second_largest(t_stack *list, size_t max)
 {
 	t_stack	*backward;
 
 	backward = list->prev->prev;
 	while (list->index != backward->index)
 	{
-		// if (list->index == max || list->index == (pivot))
-		if (list->index == max || list->index == max-1 || list->index == (pivot))
+		if (list->index == max || list->index == (max - 1) \
+								|| list->index == (max - 2))
 			return (list->index);
-		// if (backward->index == max || backward->index == (pivot))
-		if (backward->index == max || list->index == max-1 || backward->index == (pivot))
+		if (backward->index == max || backward->index == (max - 1) \
+									|| backward->index == (max - 2))
 			return (backward->index);
 		list = list->next;
 		backward = backward->prev;
@@ -34,118 +31,72 @@ int	find_largest_or_pivot(t_stack *list, int max, int pivot)
 	return (list->index);
 }
 
-// int	find_closest_max_secondmax_pivot(t_stack *list, int max, int pivot)
-// {
-// 	t_stack	*backward;
-
-// 	backward = list->prev->prev;
-// 	while (list->index != backward->index)
-// 	{
-// 		// if (list->index == max || list->index == (pivot))
-// 		if (list->index == max || list->index == max-1 || list->index == (pivot))
-// 			return (list->index);
-// 		// if (backward->index == max || backward->index == (pivot))
-// 		if (backward->index == max || list->index == max-1 || backward->index == (pivot))
-// 			return (backward->index);
-// 		list = list->next;
-// 		backward = backward->prev;
-// 	}
-// 	return (list->index);
-// }
-
-/*
-void swap_second_and_third(t_info *info_a, t_info *info_b)
+void	execute_optimized_rotate_a(t_info *info_a, t_info *info_b)
 {
-	int		target;
-	bool	forward;
+	size_t	target;
 
 	target = find_largest_or_second_largest(info_b->head, info_b->max);
-	forward = search_forward(info_b->head, target) <= search_backward(info_b->head, target);
-	if (forward)
+	if (search_forward(info_b->head, target) \
+			<= search_backward(info_b->head, target))
+	{
 		rotate_a_and_b(&(info_a->head), &(info_b->head));
+	}
 	else
+	{
 		rotate_a(&(info_a->head));
-	swap_a(&(info_a->head));
-	if (forward)
+	}
+}
+
+void	execute_optimized_reverse_rotate_a(t_info *info_a, t_info *info_b)
+{
+	long	target;
+
+	target = find_largest_or_second_largest(info_b->head, info_b->max);
+	if (search_forward(info_b->head, target) \
+				<= search_backward(info_b->head, target))
+	{
 		reverse_rotate_a(&(info_a->head));
+	}
 	else
+	{
 		reverse_rotate_a_and_b(&(info_a->head), &(info_b->head));
+	}
+}
+
+int	check_put_back_on_top(t_info *info_a)
+{
+	return ((info_a->head->index - 1 == info_a->head->prev->prev->index \
+			&& (info_a->head->index + 1 == info_a->head->next->index \
+			|| info_a->head->index == info_a->max)) \
+			|| info_a->head->index - 2 == info_a->head->prev->prev->index);
 }
 */
 
 void	find_larger_than_pivot_and_push_a(t_info *info_a, t_info *info_b)
 {
-	int		target;
-	int		pivot;
+	size_t	target;
 
-	pivot = info_b->max - 5;
-	if (info_b->size < 5)
-		pivot = 1;
-	while (get_count_of_larger_than_pivot(info_b->head, pivot))
+	target = find_largest_or_second_largest(info_b->head, info_b->max);
+	if (search_forward(info_b->head, target) \
+			<= search_backward(info_b->head, target))
+		while (info_b->head->index != target)
+			rotate_b(&(info_b->head));
+	else
+		while (info_b->head->index != target)
+			reverse_rotate_b(&(info_b->head));
+	push_a(info_a, info_b);
+	if (info_a->head->next->index + 1 == info_a->head->next->next->index)
 	{
-		target = find_largest_or_pivot(info_b->head, info_b->max, pivot);
-		if (search_forward(info_b->head, target) <= search_backward(info_b->head, target))
-		{
-			while (info_b->head->index != target)
-				rotate_b(&(info_b->head));
-		}
-		else
-		{
-			while (info_b->head->index != target)
-				reverse_rotate_b(&(info_b->head));
-		}
-		push_a(info_a, info_b);
+		if (info_a->head->index + 3 == info_a->head->next->index)
+			execute_optimized_rotate_a(info_a, info_b);
+	}
+	else
+	{
 		if (info_a->head->index - 1 == info_a->head->next->index)
 			swap_a(&(info_a->head));
-		else if (!((info_a->head->index + 1 == info_a->head->next->index || info_a->head->index + 2 == info_a->head->next->index) && (info_a->head->next->index + 1 == info_a->head->next->next->index)))
-		{
-			if (!(info_a->head->index == info_a->max || info_a->head->index == info_a->max - 1 || info_a->head->index == info_a->max - 2))
-				rotate_a(&(info_a->head));
-		}
-		if (info_a->head->index + 1 == info_a->head->next->index)
-		{
-			while (info_a->head->index - 1 == info_a->head->prev->prev->index)
-				reverse_rotate_a(&(info_a->head));
-		}
-		if (info_a->head->index - 2 == info_a->head->next->index)
-			reverse_rotate_a(&(info_a->head));
-		// if (target == pivot)
-		// {
-			// pivot++;
-		// }
-		// print_list(info_a->head);
-	}
-
-
-	/*
-	if (info_a->head->next->next != 0 && info_a->head->next->next->index < info_a->head->next->index)
-		swap_second_and_third(info_a, info_b);
-	*/
-}
-
-/*
-void	find_largest_and_push_a(t_info *info_a, t_info *info_b)
-{
-	size_t	size;
-	int		target;
-
-	size = info_b->size;
-	while (size--)
-	{
-		target = find_largest_or_second_largest(info_b->head, info_b->max);
-		if (search_forward(info_b->head, target) <= search_backward(info_b->head, target))
-		{
-			while (info_b->head->index != target)
-				rotate_b(&(info_b->head));
-		}
 		else
-		{
-			while (info_b->head->index != target)
-				reverse_rotate_b(&(info_b->head));
-		}
-		push_a(info_a, info_b);
-		if (info_a->head->next->index != 0 && info_a->head->next->index < info_a->head->index)
-			swap_a(&(info_a->head));
+			execute_optimized_rotate_a(info_a, info_b);
 	}
+	while (check_put_back_on_top(info_a))
+		execute_optimized_reverse_rotate_a(info_a, info_b);
 }
-*/
