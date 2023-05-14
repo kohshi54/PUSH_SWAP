@@ -17,7 +17,7 @@ LIBRARY = -L./$(LIBFT_DIR) -lft
 
 all : $(NAME)
 
-$(NAME) : $(OBJS) $(LIBFT)
+$(NAME) : $(OBJS) $(LIBFT) $(INCLUDES)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBRARY) -o $(NAME)
 
 $(LIBFT) : $(LIBFT_DIR)
