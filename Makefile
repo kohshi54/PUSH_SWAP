@@ -8,7 +8,7 @@ SRCS = push_swap.c ft_prepare.c ft_make_stack.c \
 		ft_test.c
 OBJS = $(SRCS:%.c=%.o)
 
-LIBFT = libft.a
+LIBFT = LIBFT/libft.a
 LIBFT_DIR = LIBFT/
 
 INCLUDES = push_swap.h
@@ -34,6 +34,3 @@ fclean : clean
 re : fclean all
 
 .PHONY : clean fclean re all
-
-.SECONDARY :
-
