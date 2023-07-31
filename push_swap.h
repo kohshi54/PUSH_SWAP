@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 16:39:19 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/05/12 17:48:55 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/31 18:56:34 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include "LIBFT/libft.h"
 # include "LIBFT/ft_printf.h"
+# include "LIBFT/get_next_line.h"
 
 typedef struct stack
 {
@@ -39,6 +40,7 @@ void	swap(t_stack **list);
 void	push(t_stack **list_a, t_stack **list_b);
 void	rotate(t_stack **list);
 void	reverse_rotate(t_stack **list);
+void	swap_a_and_b(t_stack **list_a, t_stack **list_b);
 
 /* ft_operation2.c */
 void	swap_b(t_stack **list);
@@ -72,6 +74,7 @@ size_t	search_backward(t_stack *list, size_t target);
 
 /* ft_sort.c */
 void	sort_by_input_number(t_info *info_a, t_info *info_b);
+size_t	check_if_list_is_sorted(t_info info_a);
 
 /* ft_push_to_a.c */
 void	find_largest_and_push_a(t_info *info_a, t_info *info_b);
@@ -79,5 +82,18 @@ void	find_largest_and_push_a(t_info *info_a, t_info *info_b);
 /* ft_push_to_b.c */
 void	find_less_than_pivot_and_push_b(t_info *info_a, t_info *info_b, \
 											size_t pivot, size_t element);
+
+/* bonus */
+void	do_sa(t_stack **list);
+void	do_sb(t_stack **list);
+void	do_ss(t_stack **list_a, t_stack **list_b);
+void	do_pa(t_info *info_a, t_info *info_b);
+void	do_pb(t_info *info_a, t_info *info_b);
+void	do_ra(t_stack **list);
+void	do_rb(t_stack **list);
+void	do_rr(t_stack **list_a, t_stack **list_b);
+void	do_rra(t_stack **list);
+void	do_rrb(t_stack **list);
+void	do_rrr(t_stack **list_a, t_stack **list_b);
 
 #endif

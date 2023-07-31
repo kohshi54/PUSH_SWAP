@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 16:47:57 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/05/12 16:51:00 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/31 15:49:30 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,11 @@ void	reverse_rotate(t_stack **list)
 		return ;
 	swap(&last);
 	*list = last;
+}
+
+void	reverse_rotate_a_and_b(t_stack **list_a, t_stack **list_b)
+{
+	reverse_rotate(list_a);
+	reverse_rotate(list_b);
+	ft_printf("rrr\n");
 }
