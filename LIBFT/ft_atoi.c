@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 12:37:11 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/05/12 16:53:46 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/31 15:27:04 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,31 @@ static int	ft_isspace(int c)
 	return (0);
 }
 
+char	skip_space_and_operator(const char **str)
+{
+	while (ft_isspace(**str))
+		(*str)++;
+	if (**str == '-')
+	{
+		(*str)++;
+		return (-1);
+	}
+	else if (**str == '+')
+	{
+		(*str)++;
+	}
+	return (1);
+}
+
 long	ft_atoi(const char *str)
 {
 	char	neg_flg;
 	long	num;
 
-	neg_flg = 1;
 	num = 0;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '-' || *str == '+')
-		if (*str++ == '-')
-			neg_flg = -1;
+	neg_flg = skip_space_and_operator(&str);
+	if (*str == '\0')
+		return (WRONG_NUM);
 	while (ft_isdigit(*str))
 	{
 		if (neg_flg == -1)
