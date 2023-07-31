@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 18:57:10 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/31 19:10:35 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/31 19:13:51 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	put_error_and_exit(void)
 {
-	ft_printf("Error\n");
+	ft_putstr_fd("Error\n", STDERR_FILENO);
 	exit(0);
 }
 
