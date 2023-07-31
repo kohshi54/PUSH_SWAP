@@ -6,7 +6,7 @@
 /*   By: kyamaguc <kyamaguc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 18:57:10 by kyamaguc          #+#    #+#             */
-/*   Updated: 2023/07/31 19:13:51 by kyamaguc         ###   ########.fr       */
+/*   Updated: 2023/07/31 19:19:12 by kyamaguc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	main(int argc, char *argv[])
 		if (!line)
 			break ;
 		do_operation(line, &info_a, &info_b);
+		free(line);
 	}
 	if (check_if_list_is_sorted(info_a) && check_if_infob_is_empty(info_b))
 		ft_printf("OK\n");
